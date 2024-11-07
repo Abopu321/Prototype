@@ -1,113 +1,497 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Ella Chat</title>
+    <title>Code Master - Full HTML Learning</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f0f2f5;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #1a73e8;
+            color: #ffffff;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Navigation styles */
+        #nav-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background-color: #1a73e8;
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100%;
+            background-color: #ffffff;
+            padding: 2rem;
+            transition: left 0.3s ease-in-out;
+            z-index: 1000;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        nav.open {
+            left: 0;
+        }
+
+        nav ul {
+            list-style-type: none;
+        }
+
+        nav ul li {
+            margin-bottom: 1rem;
+        }
+
+        nav ul li a {
+            color: #1a73e8;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        /* Main content styles */
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        section {
+            background-color: #ffffff;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #1a73e8;
+            margin-bottom: 1rem;
+        }
+
+        .code-box {
+            background-color: #f1f3f4;
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        button {
+            background-color: #1a73e8;
+            color: #ffffff;
+            border: none;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #1557b0;
+        }
+
+        .output {
+            margin-top: 1rem;
+            border: 1px solid #ccc;
+            padding: 1rem;
+            border-radius: 4px;
+        }
+
+        /* Footer styles */
+        footer {
+            background-color: #1a73e8;
+            color: #ffffff;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* Canvas styles */
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <div class="welcome" id="welcome">
-            <h2>Welcome to Ella Chat</h2>
-            <input type="text" id="userName" placeholder="আপনার নাম লিখুন">
-            <input type="text" id="userImage" placeholder="আপনার ইমেজ লিঙ্ক লিখুন">
-            <button onclick="joinChat()">যোগ দিন</button>
-        </div>
-        <div class="chat-box" id="chatBox" style="display:none;">
-            <div class="messages" id="messages"></div>
-            <input type="text" id="messageInput" placeholder="আপনার বার্তা লিখুন">
-            <button onclick="sendMessage()">পাঠান</button>
-        </div>
-    </div>
-    <style>
-    body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 20px;
-}
+    <canvas id="particles-canvas"></canvas>
+    <button id="nav-toggle">☰</button>
+    <nav id="main-nav">
+        <ul>
+            <li><a href="#basics">HTML Basics</a></li>
+            <li><a href="#headings">Headings</a></li>
+            <li><a href="#paragraphs">Paragraphs</a></li>
+            <li><a href="#lists">Lists</a></li>
+            <li><a href="#forms">Forms</a></li>
+            <li><a href="#media">Media</a></li>
+            <li><a href="#links">Links</a></li>
+            <li><a href="#tables">Tables</a></li>
+            <li><a href="#semantic">Semantic HTML</a></li>
+            <li><a href="#attributes">HTML Attributes</a></li>
+            <li><a href="#block-inline">Block vs Inline Elements</a></li>
+        </ul>
+    </nav>
 
-.container {
-    max-width: 600px;
-    margin: auto;
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
+    <header>
+        <h1>Code Master</h1>
+        <p>Master the basics and advanced concepts of HTML</p>
+    </header>
 
-.welcome {
-    text-align: center;
-}
+    <main>
+        <section id="basics">
+            <h2>HTML Basics</h2>
+            <p>HTML (HyperText Markup Language) is the standard language for creating webpages.</p>
+            <div class="code-box">
+                <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;My HTML Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Hello, World!&lt;/h1&gt;
+    &lt;p&gt;This is my first HTML page.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </div>
+            <button onclick="showOutput('basics')">Show Output</button>
+            <div id="basics-output" class="output" style="display: none;"></div>
+        </section>
 
-.chat-box {
-    margin-top: 20px;
-}
+        <section id="headings">
+            <h2>HTML Headings</h2>
+            <p>Headings in HTML range from h1 (largest) to h6 (smallest):</p>
+            <div class="code-box">
+                <pre><code>&lt;h1&gt;This is a Heading 1&lt;/h1&gt;
+&lt;h2&gt;This is a Heading 2&lt;/h2&gt;
+&lt;h3&gt;This is a Heading 3&lt;/h3&gt;
+&lt;h4&gt;This is a Heading 4&lt;/h4&gt;
+&lt;h5&gt;This is a Heading 5&lt;/h5&gt;
+&lt;h6&gt;This is a Heading 6&lt;/h6&gt;</code></pre>
+            </div>
+            <button onclick="showOutput('headings')">Show Output</button>
+            <div id="headings-output" class="output" style="display: none;"></div>
+        </section>
 
-.messages {
-    height: 300px;
-    overflow-y: auto;
-    border: 1px solid #ccc;
-    margin-bottom: 10px;
-    padding: 10px;
-    background: #eaeaea;
-}
+        <section id="paragraphs">
+            <h2>HTML Paragraphs</h2>
+            <p>Paragraphs are defined using the &lt;p&gt; tag:</p>
+            <div class="code-box">
+                <pre><code>&lt;p&gt;This is a simple paragraph.&lt;/p&gt;
+&lt;p&gt;Another paragraph goes here.&lt;/p&gt;</code></pre>
+            </div>
+            <button onclick="showOutput('paragraphs')">Show Output</button>
+            <div id="paragraphs-output" class="output" style="display: none;"></div>
+        </section>
 
-.messages p {
-    margin: 5px 0;
-}
+        <section id="lists">
+            <h2>HTML Lists</h2>
+            <p>You can create ordered and unordered lists using &lt;ul&gt; (unordered) and &lt;ol&gt; (ordered) tags:</p>
+            <div class="code-box">
+                <pre><code>&lt;ul&gt;
+    &lt;li&gt;First item&lt;/li&gt;
+    &lt;li&gt;Second item&lt;/li&gt;
+    &lt;li&gt;Third item&lt;/li&gt;
+&lt;/ul&gt;
 
-input[type="text"] {
-    width: 70%;
-    padding: 10px;
-    margin: 5px 0;
-}
+&lt;ol&gt;
+    &lt;li&gt;First item&lt;/li&gt;
+    &lt;li&gt;Second item&lt;/li&gt;
+    &lt;li&gt;Third item&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+            </div>
+            <button onclick="showOutput('lists')">Show Output</button>
+            <div id="lists-output" class="output" style="display: none;"></div>
+        </section>
 
-button {
-    padding: 10px;
-}
-    </style>
+        <section id="forms">
+            <h2>HTML Forms</h2>
+            <p>HTML forms allow you to collect user input:</p>
+            <div class="code-box">
+                <pre><code>&lt;form action="/submit" method="POST"&gt;
+    &lt;label for="name"&gt;Name:&lt;/label&gt;
+    &lt;input type="text" id="name" name="name"&gt;
+    &lt;br&gt;
+    &lt;label for="email"&gt;Email:&lt;/label&gt;
+    &lt;input type="email" id="email" name="email"&gt;
+    &lt;br&gt;
+    &lt;input type="submit" value="Submit"&gt;
+&lt;/form&gt;</code></pre>
+            </div>
+            <button onclick="showOutput('forms')">Show Output</button>
+            <div id="forms-output" class="output" style="display: none;"></div>
+        </section>
+
+        <section id="media">
+            <h2>HTML Images and Videos</h2>
+            <p>Adding media like images and videos in HTML is simple:</p>
+            <div class="code-box">
+                <pre><code>&lt;img src="https://iili.io/dgimjHv.jpg" alt="Sample Image" width="300" height="300"&gt;
+&lt;video controls width="300" height="300"&gt;
+    &lt;source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4"&gt;
+    Your browser does not support the video tag.
+&lt;/video&gt;</code></pre>
+            </div>
+            <button onclick="showOutput('media')">Show Output</button>
+            <div id="media-output" class="output" style="display: none;"></div>
+        </section>
+
+        <section id="links">
+            <h2>HTML Links</h2>
+            <p>Links are created using the &lt;a&gt; tag:</p>
+            <div class="code-box">
+                <pre><code>&lt;a href="https://abopu321.github.io/Afrox/"&gt;Visit Afrox.com&lt;/a&gt;
+&lt;a href="https://abopu321.github.io/Afrox/"&gt;afrox2.0&lt;/a&gt;
+&lt;a href="#top"&gt;Back to Top&lt;/a&gt;</code></pre>
+            </div>
+            <button onclick="showOutput('links')">Show Output</button>
+            <div id="links-output" class="output" style="display: none;"></div>
+        </section>
+
+        <section id="tables">
+            <h2>HTML Tables</h2>
+            <p>Tables are used to organize data in rows and columns:</p>
+            <div class="code-box">
+                <pre><code>&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th&gt;Name&lt;/th&gt;
+        &lt;th&gt;Age&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Alice&lt;/td&gt;
+        &lt;td&gt;25&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Bob&lt;/td&gt;
+        &lt;td&gt;30&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+            </div>
+            <button onclick="showOutput('tables')">Show Output</button>
+            <div id="tables-output" class="output" style="display: none;"></div>
+        </section>
+
+        <section id="semantic">
+            <h2>Semantic HTML</h2>
+            <p>Semantic HTML provides meaning to the structure of a webpage:</p>
+            <div class="code-box">
+                <pre><code>&lt;header&gt;
+    &lt;h1&gt;Welcome to My Website&lt;/h1&gt;
+&lt;/header&gt;
+
+&lt;nav&gt;
+    &lt;ul&gt;
+        &lt;li&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;About&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/nav&gt;
+
+&lt;main&gt;
+    &lt;article&gt;
+        &lt;h2&gt;Main Content&lt;/h2&gt;
+        &lt;p&gt;This is the main article content of the webpage.&lt;/p&gt;
+    &lt;/article&gt;
+&lt;/main&gt;
+
+&lt;footer&gt;
+    &lt;p&gt;© 2024 My Website&lt;/p&gt;
+&lt;/footer&gt;</code></pre>
+            </div>
+            <button onclick="showOutput('semantic')">Show Output</button>
+            <div id="semantic-output" class="output" style="display: none;"></div>
+        </section>
+
+        <section id="attributes">
+            <h2>HTML Attributes</h2>
+            <p>HTML attributes provide additional information about HTML elements:</p>
+            <div class="code-box">
+                <pre><code>&lt;a href="https://www.example.com" target="_blank"&gt;Visit Example.com&lt;/a&gt;
+&lt;img src="image.jpg" alt="A beautiful landscape" width="300" height="300"&gt;
+&lt;input type="text" name="username" id="username" required&gt;</code></pre>
+            </div>
+            <button onclick="showOutput('attributes')">Show Output</button>
+            <div id="attributes-output" class="output" style="display: none;"></div>
+        </section>
+
+        <section id="block-inline">
+            <h2>Block vs Inline Elements</h2>
+            <p>HTML elements are typically either block-level or inline:</p>
+            <div class="code-box">
+                <pre><code>&lt;!-- Block-level elements --&gt;
+&lt;div&gt;This is a block-level element&lt;/div&gt;
+&lt;p&gt;This is another block-level element&lt;/p&gt;
+
+&lt;!-- Inline elements --&gt;
+&lt;span&gt;This is an inline element&lt;/span&gt;
+&lt;a href="#"&gt;This is also an inline element&lt;/a&gt;</code></pre>
+            </div>
+            <button onclick="showOutput('block-inline')">Show Output</button>
+            <div id="block-inline-output" class="output" style="display: none;"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Code Master by Abopu. All rights reserved.</p>
+    </footer>
+
     <script>
-    let userName = '';
-let userImage = '';
+        // Navigation toggle
+        const navToggle = document.getElementById('nav-toggle');
+        const mainNav = document.getElementById('main-nav');
 
-function joinChat() {
-    userName = document.getElementById('userName').value;
-    userImage = document.getElementById('userImage').value;
+        navToggle.addEventListener('click', () => {
+            mainNav.classList.toggle('open');
+            navToggle.textContent = mainNav.classList.contains('open') ? '✕' : '☰';
+        });
 
-    if (userName && userImage) {
-        document.getElementById('welcome').style.display = 'none';
-        document.getElementById('chatBox').style.display = 'block';
-        displayMessage(`স্বাগতম, ${userName}!`, 'system');
-    } else {
-        alert('অনুগ্রহ করে নাম এবং ইমেজ লিঙ্ক পূরণ করুন!');
-    }
-}
+        // Close navigation when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!mainNav.contains(event.target) && event.target !== navToggle) {
+                mainNav.classList.remove('open');
+                navToggle.textContent = '☰';
+            }
+        });
 
-function sendMessage() {
-    const messageInput = document.getElementById('messageInput');
-    const message = messageInput.value;
+        // Smooth scrolling for navigation links
+        const navLinks = document.querySelectorAll('nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                    mainNav.classList.remove('open');
+                    navToggle.textContent = '☰';
+                }
+            });
+        });
 
-    if (message) {
-        displayMessage(message, 'user');
-        messageInput.value = ''; // Clear input
-    }
-}
+        // Show/hide output
+        function showOutput(sectionId) {
+            const outputDiv = document.getElementById(`${sectionId}-output`);
+            const button = outputDiv.previousElementSibling;
+            const codeBox = outputDiv.previousElementSibling.previousElementSibling;
+            const code = codeBox.textContent.trim();
 
-function displayMessage(message, sender) {
-    const messagesDiv = document.getElementById('messages');
-    const messageElement = document.createElement('p');
+            if (outputDiv.style.display === 'none') {
+                outputDiv.innerHTML = code;
+                outputDiv.style.display = 'block';
+                button.textContent = 'Hide Output';
+            } else {
+                outputDiv.style.display = 'none';
+                button.textContent = 'Show Output';
+            }
+        }
 
-    if (sender === 'user') {
-        messageElement.innerHTML = `<strong>${userName}:</strong> ${message}`;
-    } else {
-        messageElement.innerHTML = `<strong>Ella:</strong> ${message}`;
-    }
+        // Particle animation
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
 
-    messagesDiv.appendChild(messageElement);
-    messagesDiv.scrollTop = messagesDiv.scrollHeight; // Scroll to the bottom
-}
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particles = [];
+        const particleCount = 100;
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 5 + 1;
+                this.speedX = Math.random() * 3 - 1.5;
+                this.speedY = Math.random() * 3 - 1.5;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x > canvas.width) this.x = 0;
+                else if (this.x < 0) this.x = canvas.width;
+
+                if (this.y > canvas.height) this.y = 0;
+                else if (this.y < 0) this.y = canvas.height;
+            }
+
+            draw() {
+                ctx.fillStyle = 'rgba(26, 115, 232, 0.1)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (const particle of particles) {
+                particle.update();
+                particle.draw();
+            }
+            requestAnimationFrame(animate);
+        }
+
+        init();
+        animate();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
     </script>
 </body>
-</html>
+                                                     </html>
